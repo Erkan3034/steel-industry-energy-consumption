@@ -14,6 +14,7 @@ Predicts the energy consumption (`Usage_kWh`, per 15-minute interval) of a steel
 | | |
 | :--- | :--- |
 | Live demo | [huggingface.co/spaces/erkanturgut/steel-energy-predictor](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor) |
+| Model on Hugging Face | [huggingface.co/erkanturgut/steel-energy-consumption-ridge](https://huggingface.co/erkanturgut/steel-energy-consumption-ridge) |
 | Kaggle notebook | [kaggle.com/code/erkanturgut/steel-industry-energy-consumption](https://www.kaggle.com/code/erkanturgut/steel-industry-energy-consumption/) |
 | Model card | [MODEL_CARD.md](MODEL_CARD.md) |
 
@@ -46,6 +47,7 @@ Cross-validation RMSE is close to test RMSE, indicating no meaningful overfittin
 │   └── README.md               # download instructions
 ├── docs/
 │   └── huggingface_deployment.md
+├── hf_model/                   # Hugging Face model repo card
 ├── hf_space/                   # Space README (front matter) + slim requirements
 ├── models/
 │   └── steel_energy_pipeline_v1.pkl

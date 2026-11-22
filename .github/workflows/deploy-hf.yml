@@ -1,13 +1,14 @@
-name: Deploy to Hugging Face Space
+name: Deploy to Hugging Face
 
 on:
   push:
     branches: [main]
-    paths: ["app/**", "src/**", "models/**", "hf_space/**", ".github/workflows/deploy-hf.yml"]
+    paths: ["app/**", "src/**", "models/**", "hf_space/**", "hf_model/**", ".github/workflows/deploy-hf.yml"]
   workflow_dispatch:
 
 env:
   HF_SPACE: erkanturgut/steel-energy-predictor
+  HF_MODEL: erkanturgut/steel-energy-consumption-ridge
 
 jobs:
   deploy:
@@ -46,5 +47,30 @@ jobs:
               repo_type="space",
               commit_message=f"Sync from GitHub {os.environ['GITHUB_SHA'][:7]}",
               delete_patterns=["*.py", "*.pkl", "*.md", "*.txt", "Dockerfile"],
+          )
+          EOF
+      - name: Upload model repo
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then echo "HF_TOKEN secret not set, skipping."; exit 0; fi
+          python - <<'EOF'
+          import os, shutil, tempfile
+          from huggingface_hub import HfApi
+
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          repo = os.environ["HF_MODEL"]
+          api.create_repo(repo, repo_type="model", exist_ok=True)
+
+          stage = tempfile.mkdtemp()
+          shutil.copy("models/steel_energy_pipeline_v1.pkl", stage)
+          shutil.copy("hf_model/README.md", f"{stage}/README.md")
+          shutil.copy("LICENSE", stage)
+
+          api.upload_folder(
+              folder_path=stage,
+              repo_id=repo,
+              repo_type="model",
+              commit_message=f"Sync from GitHub {os.environ['GITHUB_SHA'][:7]}",
           )
           EOF
