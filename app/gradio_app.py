@@ -51,7 +51,7 @@ def predict(lagging_power, leading_power, lagging_pf, leading_pf, hour, minute, 
     end_minutes = int(hour) * 60 + int(minute) + 15
     end = f"{(end_minutes // 60) % 24:02d}:{end_minutes % 60:02d}"
     details = (
-        "| | |\n|:--|:--|\n"
+        "| Detail | Value |\n|:--|:--|\n"
         f"| Interval | {day_of_week} {start} – {end} ({reading.week_status}) |\n"
         f"| Load type | {load_type.replace('_', ' ')} |\n"
         f"| Equivalent average load | {kwh * 4:.1f} kW |\n"
