@@ -1,6 +1,5 @@
 ---
 title: Steel Energy Predictor
-emoji: 🏭
 colorFrom: gray
 colorTo: yellow
 sdk: gradio
@@ -17,10 +16,11 @@ tags:
   - tabular-regression
 ---
 
-# 🏭 Steel Industry Energy Predictor
+# Steel Industry Energy Consumption Predictor
 
 Polynomial (degree 2) + Ridge regression pipeline predicting `Usage_kWh` per 15-minute interval.
 
 **Test set:** R² 0.9799 · RMSE 4.79 kWh · MAE 3.07 kWh
 
-Source code, training pipeline and model card: [github.com/Erkan3034/steel-industry-energy-consumption](https://github.com/Erkan3034/steel-industry-energy-consumption)
+- Kaggle notebook: [kaggle.com/code/erkanturgut/steel-industry-energy-consumption](https://www.kaggle.com/code/erkanturgut/steel-industry-energy-consumption/)
+- Source code, training pipeline and model card: [github.com/Erkan3034/steel-industry-energy-consumption](https://github.com/Erkan3034/steel-industry-energy-consumption)

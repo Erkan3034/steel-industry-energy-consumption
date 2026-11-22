@@ -1,14 +1,23 @@
-# 🏭 Steel Industry Energy Consumption Prediction
+# Steel Industry Energy Consumption Prediction
 
 [![CI](https://github.com/Erkan3034/steel-industry-energy-consumption/actions/workflows/ci.yml/badge.svg)](https://github.com/Erkan3034/steel-industry-energy-consumption/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-[![Hugging Face Space](https://img.shields.io/badge/🤗%20Hugging%20Face-Space-yellow.svg)](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Notebook-20BEFF.svg)](https://www.kaggle.com/code/erkanturgut/steel-industry-energy-consumption/)
+[![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-yellow.svg)](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor)
 
 Predicts the energy consumption (`Usage_kWh`, per 15-minute interval) of a steel plant from electrical sensor readings and time features. Focus: **leakage prevention**, **overfitting control** and **cyclical time encoding** in a reproducible scikit-learn pipeline.
 
-## 🏆 Results (hold-out test set, 20%)
+## Links
+
+| | |
+| :--- | :--- |
+| Live demo | [huggingface.co/spaces/erkanturgut/steel-energy-predictor](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor) |
+| Kaggle notebook | [kaggle.com/code/erkanturgut/steel-industry-energy-consumption](https://www.kaggle.com/code/erkanturgut/steel-industry-energy-consumption/) |
+| Model card | [MODEL_CARD.md](MODEL_CARD.md) |
+
+## Results (hold-out test set, 20%)
 
 | Metric | Score |
 | :--- | :--- |
@@ -17,15 +26,15 @@ Predicts the energy consumption (`Usage_kWh`, per 15-minute interval) of a steel
 | **MAE** | **3.0710 kWh** |
 | 5-Fold CV RMSE (train) | 4.9379 ± 0.5532 |
 
-CV RMSE ≈ test RMSE → no sign of overfitting.
+Cross-validation RMSE is close to test RMSE, indicating no meaningful overfitting.
 
-## 🔬 Methodology
+## Methodology
 
 1. **Leakage prevention** — `CO2(tCO2)` is dropped: it is derived from consumption (ρ ≈ 0.99 with the target) and would not be available before the fact.
 2. **Cyclical time encoding** — `NSM` (seconds from midnight) → `hour_sin`, `hour_cos`, so 23:45 and 00:15 are adjacent.
 3. **Model** — `StandardScaler → PolynomialFeatures(degree=2)` on numerics, `OneHotEncoder(drop="first")` on categoricals, `Ridge(alpha=10)` (alpha from `GridSearchCV`). Everything lives inside one `Pipeline`, so preprocessing is fit only on training folds.
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 .
@@ -59,7 +68,7 @@ CV RMSE ≈ test RMSE → no sign of overfitting.
 └── LICENSE
 ```
 
-## 🚀 Quickstart
+## Quickstart
 
 ```bash
 git clone https://github.com/Erkan3034/steel-industry-energy-consumption.git
@@ -110,22 +119,22 @@ kwh = predictor.predict(SensorReading(
 ))
 ```
 
-## 🌐 Live Demo
+## Live Demo
 
-**[huggingface.co/spaces/erkanturgut/steel-energy-predictor](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor)** — deployment steps in [docs/huggingface_deployment.md](docs/huggingface_deployment.md).
+The Gradio app is deployed on Hugging Face Spaces and redeployed automatically from `main` by GitHub Actions. Deployment details: [docs/huggingface_deployment.md](docs/huggingface_deployment.md).
 
-## 📊 Dataset
+## Dataset
 
 [Steel Industry Energy Consumption](https://www.kaggle.com/datasets/csafrit2/steel-industry-energy-consumption) (DAEWOO Steel Co., South Korea, 2018; also on [UCI](https://archive.ics.uci.edu/dataset/851/steel+industry+energy+consumption)). 35,040 rows, 15-minute resolution.
 
-## ⚠️ Limitations
+## Limitations
 
 Single plant, single year, random (not time-based) split. See [MODEL_CARD.md](MODEL_CARD.md).
 
-## 👨‍💻 Author
+## Author
 
 **Erkan Turgut** — [GitHub](https://github.com/Erkan3034) · [Kaggle](https://www.kaggle.com/erkanturgut) · [LinkedIn](https://www.linkedin.com/in/erkanturgut1205/)
 
-## 📄 License
+## License
 
 [MIT](LICENSE)

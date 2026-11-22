@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 from src.config import CONFIG  # noqa: E402
 from src.predict import DAYS, LOAD_TYPES, EnergyPredictor, SensorReading  # noqa: E402
 
-st.set_page_config(page_title="Steel Energy Predictor", page_icon="🏭", layout="centered")
+st.set_page_config(page_title="Steel Energy Predictor", layout="centered")
 
 
 @st.cache_resource
@@ -22,13 +22,13 @@ def load_predictor() -> EnergyPredictor:
 
 predictor = load_predictor()
 
-st.title("🏭 Steel Industry Energy Predictor")
+st.title("Steel Industry Energy Consumption Predictor")
 st.write("Adjust the sensor readings and time to predict energy consumption (kWh) for a 15-minute interval.")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("⚡ Power Metrics")
+    st.subheader("Electrical measurements")
     lagging_power = st.number_input(
         "Lagging Reactive Power (kVarh)", min_value=0.0, max_value=100.0, value=10.0, step=1.0
     )
@@ -43,7 +43,7 @@ with col1:
     )
 
 with col2:
-    st.subheader("⏱️ Time & Load")
+    st.subheader("Time and operating profile")
     hour = st.slider("Hour of the Day", 0, 23, 12)
     minute = st.select_slider("Minute", options=[0, 15, 30, 45], value=0)
     day_of_week = st.selectbox("Day of Week", DAYS)
@@ -64,7 +64,7 @@ if st.button("Predict Energy Consumption", type="primary"):
     prediction = predictor.predict(reading)
     st.success(f"### Predicted Energy Consumption: **{prediction:.2f} kWh**")
 
-with st.expander("ℹ️ About the model"):
+with st.expander("About the model"):
     st.markdown(
         "Polynomial (degree 2) + Ridge regression pipeline. Test set: **R² 0.9799 · RMSE 4.79 · MAE 3.07**. "
         "`CO2(tCO2)` is excluded to avoid target leakage; time of day is cyclically encoded (sin/cos). "

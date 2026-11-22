@@ -10,8 +10,9 @@ pytestmark = pytest.mark.skipif(not CONFIG.paths.model_file.exists(), reason="mo
 def test_gradio_predict_returns_kwh():
     from app.gradio_app import predict
 
-    out = predict(23.0, 0.0, 80.0, 100.0, 10, 0, "Monday", "Medium_Load")
-    assert "kWh" in out and "Weekday" in out
+    kwh, details = predict(23.0, 0.0, 80.0, 100.0, 10, 0, "Monday", "Medium_Load")
+    assert kwh >= 0
+    assert "Weekday" in details and "10:00 – 10:15" in details
 
 
 def test_streamlit_app_runs():

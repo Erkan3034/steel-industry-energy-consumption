@@ -11,6 +11,7 @@
 | **Training date** | 2026-11-23 |
 | **Author** | Erkan Turgut |
 | **License** | MIT |
+| **Notebook** | [Kaggle: steel-industry-energy-consumption](https://www.kaggle.com/code/erkanturgut/steel-industry-energy-consumption/) |
 
 ## 2. Intended Use
 
