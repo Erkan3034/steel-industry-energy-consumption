@@ -37,8 +37,8 @@ with gr.Blocks(title="Steel Energy Predictor") as demo:
     with gr.Row():
         with gr.Column():
             gr.Markdown("### ⚡ Power Metrics")
-            lagging_power = gr.Number(label="Lagging Reactive Power (kVarh)", value=10.0, minimum=0, maximum=100)
-            leading_power = gr.Number(label="Leading Reactive Power (kVarh)", value=0.0, minimum=0, maximum=30)
+            lagging_power = gr.Number(label="Lagging Reactive Power (kVarh)", value=10.0, minimum=0)
+            leading_power = gr.Number(label="Leading Reactive Power (kVarh)", value=0.0, minimum=0)
             lagging_pf = gr.Number(label="Lagging Power Factor (%)", value=85.0, minimum=0, maximum=100)
             leading_pf = gr.Number(label="Leading Power Factor (%)", value=100.0, minimum=0, maximum=100)
         with gr.Column():
