@@ -41,7 +41,7 @@ CV RMSE ≈ test RMSE → no sign of overfitting.
 ├── models/
 │   └── steel_energy_pipeline_v1.pkl
 ├── notebooks/
-│   └── steel-industry-energy-consumption-prediction.ipynb   # EDA + experiments
+│   └── steel-industry-energy-consumption.ipynb   # EDA + experiments
 ├── src/
 │   ├── config.py               # paths, feature schema, hyperparameters
 │   ├── data_preprocessing.py   # DataPreprocessor: load / validate / features / split
