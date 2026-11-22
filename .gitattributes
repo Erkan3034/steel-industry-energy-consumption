@@ -1,0 +1,4 @@
+# Model binaries via Git LFS (required by Hugging Face for binary files)
+*.pkl filter=lfs diff=lfs merge=lfs -text
+*.joblib filter=lfs diff=lfs merge=lfs -text
+*.ipynb linguist-documentation

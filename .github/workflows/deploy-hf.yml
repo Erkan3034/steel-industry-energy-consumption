@@ -1,0 +1,46 @@
+name: Deploy to Hugging Face Space
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", "src/**", "models/**", "requirements.txt", "Dockerfile", "hf_space/**"]
+  workflow_dispatch:
+
+env:
+  HF_SPACE: Erkan3034/steel-energy-predictor
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "huggingface_hub>=0.30"
+      - name: Upload Space files
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then echo "HF_TOKEN secret not set, skipping."; exit 0; fi
+          python - <<'EOF'
+          import os, shutil, tempfile
+          from huggingface_hub import HfApi
+
+          stage = tempfile.mkdtemp()
+          for d in ("app", "src", "models"):
+              shutil.copytree(d, f"{stage}/{d}", ignore=shutil.ignore_patterns("__pycache__"))
+          for f in ("requirements.txt", "Dockerfile", "LICENSE", "MODEL_CARD.md"):
+              shutil.copy(f, stage)
+          shutil.copy("hf_space/README.md", f"{stage}/README.md")
+
+          HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
+              folder_path=stage,
+              repo_id=os.environ["HF_SPACE"],
+              repo_type="space",
+              commit_message=f"Sync from GitHub {os.environ['GITHUB_SHA'][:7]}",
+              delete_patterns=["*.py", "*.pkl", "*.md", "*.txt", "Dockerfile"],
+          )
+          EOF

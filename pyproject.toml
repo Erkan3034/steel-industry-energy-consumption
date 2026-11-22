@@ -1,0 +1,19 @@
+[project]
+name = "steel-energy-prediction"
+version = "1.0.0"
+description = "Energy consumption (Usage_kWh) regression for a steel plant: Polynomial + Ridge pipeline."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["N803", "N806"]
