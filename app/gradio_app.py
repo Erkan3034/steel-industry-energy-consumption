@@ -31,6 +31,11 @@ predictor = EnergyPredictor(CONFIG.paths.model_file)
 
 
 @gpu
+def _zerogpu_startup_check():
+    """Never called. ZeroGPU refuses to start without one @spaces.GPU function, but this
+    model runs on CPU, so predictions stay outside it and use no visitor GPU quota."""
+
+
 def predict(lagging_power, leading_power, lagging_pf, leading_pf, hour, minute, day_of_week, load_type):
     reading = SensorReading(
         lagging_reactive_power=float(lagging_power),
