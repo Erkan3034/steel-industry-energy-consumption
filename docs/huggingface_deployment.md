@@ -29,7 +29,7 @@ The upload goes through the Hub API, which handles the `.pkl` binary automatical
 ```bash
 pip install -U huggingface_hub
 hf auth login                      # paste the write token
-git clone https://huggingface.co/spaces/<HF_USER>/steel-energy-predictor hf-space
+git clone https://huggingface.co/spaces/erkanturgut/steel-energy-predictor hf-space
 ```
 
 Copy the runtime files into the clone:

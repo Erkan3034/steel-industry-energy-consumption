@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  HF_SPACE: Erkan3034/steel-energy-predictor
+  HF_SPACE: erkanturgut/steel-energy-predictor
 
 jobs:
   deploy:

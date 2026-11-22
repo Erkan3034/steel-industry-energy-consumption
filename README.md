@@ -1,10 +1,10 @@
 # 🏭 Steel Industry Energy Consumption Prediction
 
-[![CI](https://github.com/Erkan3034/steel-energy-consumption-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/Erkan3034/steel-energy-consumption-prediction/actions/workflows/ci.yml)
+[![CI](https://github.com/Erkan3034/steel-industry-energy-consumption/actions/workflows/ci.yml/badge.svg)](https://github.com/Erkan3034/steel-industry-energy-consumption/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-[![Hugging Face Space](https://img.shields.io/badge/🤗%20Hugging%20Face-Space-yellow.svg)](https://huggingface.co/spaces/Erkan3034/steel-energy-predictor)
+[![Hugging Face Space](https://img.shields.io/badge/🤗%20Hugging%20Face-Space-yellow.svg)](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor)
 
 Predicts the energy consumption (`Usage_kWh`, per 15-minute interval) of a steel plant from electrical sensor readings and time features. Focus: **leakage prevention**, **overfitting control** and **cyclical time encoding** in a reproducible scikit-learn pipeline.
 
@@ -62,8 +62,8 @@ CV RMSE ≈ test RMSE → no sign of overfitting.
 ## 🚀 Quickstart
 
 ```bash
-git clone https://github.com/Erkan3034/steel-energy-consumption-prediction.git
-cd steel-energy-consumption-prediction
+git clone https://github.com/Erkan3034/steel-industry-energy-consumption.git
+cd steel-industry-energy-consumption
 python -m venv .venv
 # Windows: .venv\Scripts\activate   |   Linux/macOS: source .venv/bin/activate
 pip install -r requirements-dev.txt
@@ -111,7 +111,7 @@ kwh = predictor.predict(SensorReading(
 
 ## 🌐 Live Demo
 
-**[huggingface.co/spaces/Erkan3034/steel-energy-predictor](https://huggingface.co/spaces/Erkan3034/steel-energy-predictor)** — deployment steps in [docs/huggingface_deployment.md](docs/huggingface_deployment.md).
+**[huggingface.co/spaces/erkanturgut/steel-energy-predictor](https://huggingface.co/spaces/erkanturgut/steel-energy-predictor)** — deployment steps in [docs/huggingface_deployment.md](docs/huggingface_deployment.md).
 
 ## 📊 Dataset
 
@@ -123,7 +123,7 @@ Single plant, single year, random (not time-based) split. See [MODEL_CARD.md](MO
 
 ## 👨‍💻 Author
 
-**Erkan Turgut** — [GitHub](https://github.com/Erkan3034) · [Kaggle](https://www.kaggle.com/erkanturgut) · [LinkedIn](https://www.linkedin.com/in/YOUR-LINKEDIN)
+**Erkan Turgut** — [GitHub](https://github.com/Erkan3034) · [Kaggle](https://www.kaggle.com/erkanturgut) · [LinkedIn](https://www.linkedin.com/in/erkanturgut1205/)
 
 ## 📄 License
 
