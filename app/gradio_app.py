@@ -12,9 +12,20 @@ if str(ROOT) not in sys.path:
 from src.config import CONFIG  # noqa: E402
 from src.predict import DAYS, LOAD_TYPES, EnergyPredictor, SensorReading  # noqa: E402
 
+try:  # ZeroGPU Spaces require at least one @spaces.GPU function; no-op elsewhere.
+    import spaces
+
+    gpu = spaces.GPU(duration=10)
+except ImportError:
+
+    def gpu(fn):
+        return fn
+
+
 predictor = EnergyPredictor(CONFIG.paths.model_file)
 
 
+@gpu
 def predict(lagging_power, leading_power, lagging_pf, leading_pf, hour, minute, day_of_week, load_type):
     reading = SensorReading(
         lagging_reactive_power=float(lagging_power),
