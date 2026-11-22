@@ -3,7 +3,7 @@ name: Deploy to Hugging Face Space
 on:
   push:
     branches: [main]
-    paths: ["app/**", "src/**", "models/**", "requirements.txt", "Dockerfile", "hf_space/**"]
+    paths: ["app/**", "src/**", "models/**", "hf_space/**"]
   workflow_dispatch:
 
 env:
@@ -30,11 +30,15 @@ jobs:
           from huggingface_hub import HfApi
 
           stage = tempfile.mkdtemp()
-          for d in ("app", "src", "models"):
+          for d in ("src", "models"):
               shutil.copytree(d, f"{stage}/{d}", ignore=shutil.ignore_patterns("__pycache__"))
-          for f in ("requirements.txt", "Dockerfile", "LICENSE", "MODEL_CARD.md"):
+          os.makedirs(f"{stage}/app")
+          shutil.copy("app/gradio_app.py", f"{stage}/app/gradio_app.py")
+          for f in ("LICENSE", "MODEL_CARD.md"):
               shutil.copy(f, stage)
+          # Space-specific config and slim requirements (Gradio comes from sdk_version)
           shutil.copy("hf_space/README.md", f"{stage}/README.md")
+          shutil.copy("hf_space/requirements.txt", f"{stage}/requirements.txt")
 
           HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
               folder_path=stage,

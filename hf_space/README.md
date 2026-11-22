@@ -3,8 +3,10 @@ title: Steel Energy Predictor
 emoji: 🏭
 colorFrom: gray
 colorTo: yellow
-sdk: docker
-app_port: 8501
+sdk: gradio
+sdk_version: 6.32.0
+python_version: "3.12"
+app_file: app/gradio_app.py
 pinned: false
 license: mit
 short_description: Predict steel plant energy usage (kWh) from sensor data
@@ -12,7 +14,7 @@ tags:
   - regression
   - scikit-learn
   - energy
-  - streamlit
+  - tabular-regression
 ---
 
 # 🏭 Steel Industry Energy Predictor

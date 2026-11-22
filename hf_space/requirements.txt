@@ -1,0 +1,5 @@
+# Hugging Face Space (Gradio SDK) dependencies. Gradio itself is provided by `sdk_version`.
+scikit-learn==1.6.1
+numpy==2.2.6
+pandas==2.2.3
+joblib==1.4.2

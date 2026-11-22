@@ -30,14 +30,14 @@ CV RMSE ≈ test RMSE → no sign of overfitting.
 ```
 .
 ├── app/
-│   └── app.py                  # Streamlit UI
+│   ├── app.py                  # Streamlit UI (local / Docker)
+│   └── gradio_app.py           # Gradio UI (Hugging Face Space)
 ├── data/
 │   ├── raw/                    # Steel_industry_data.csv (not committed)
 │   └── README.md               # download instructions
 ├── docs/
 │   └── huggingface_deployment.md
-├── hf_space/
-│   └── README.md               # Hugging Face Space config (front matter)
+├── hf_space/                   # Space README (front matter) + slim requirements
 ├── models/
 │   └── steel_energy_pipeline_v1.pkl
 ├── notebooks/
@@ -51,7 +51,7 @@ CV RMSE ≈ test RMSE → no sign of overfitting.
 │   └── predict.py              # SensorReading + EnergyPredictor (inference)
 ├── tests/                      # pytest suite
 ├── .github/workflows/          # CI + Hugging Face sync
-├── Dockerfile                  # HF Spaces (Docker SDK) / local container
+├── Dockerfile                  # self-hosted Streamlit container
 ├── requirements.txt
 ├── requirements-dev.txt
 ├── MODEL_CARD.md
@@ -72,7 +72,8 @@ pip install -r requirements-dev.txt
 **Run the app** (uses the committed model):
 
 ```bash
-streamlit run app/app.py
+python app/gradio_app.py     # Gradio  -> http://localhost:7860
+streamlit run app/app.py     # Streamlit -> http://localhost:8501
 ```
 
 **Retrain** (put the CSV in `data/raw/` first — see [data/README.md](data/README.md)):
