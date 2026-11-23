@@ -173,6 +173,7 @@ with gr.Blocks(title="Steel Energy Consumption Predictor") as demo:
 
         inputs = [lagging_power, leading_power, lagging_pf, leading_pf, hour, minute, day_of_week, load_type]
         button.click(predict, inputs=inputs, outputs=[result, details])
+        demo.load(predict, inputs=inputs, outputs=[result, details])
 
         gr.Examples(
             label="Example operating points",
